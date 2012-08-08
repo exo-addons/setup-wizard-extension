@@ -1,0 +1,120 @@
+body {
+	font-size: 15px;
+	line-height: 20px;
+	font-family: arial,tahoma,verdana,sans-serif;
+	color: #575757;
+	background: #ddd;
+  margin: 10px;
+}
+
+
+/**
+ * GENERIC CLASSES
+ */
+
+.SetupWizardPopup {
+	border-radius: 4px;
+	box-shadow: 1px 2px 6px #a3a6a7;
+	width: 590px; height: 460px;
+	background: white;
+  margin: 0 auto;
+}
+
+.SetupWizardPopup .Content .LabelCT{
+	font-size: 18px;
+	color: #51575b;
+  padding-bottom: 10px;
+} 
+
+.SetupWizardPopup .ButtonContent{
+	border-radius: 0 0 4px 4px;
+	background: url('../background/ButtonBGCT.png') repeat-x;
+	text-align: right;
+	padding: 26px 20px 26px 0px;
+}
+
+.SetupWizardPopup .TitleBar {
+	border-radius: 2px 2px 0 0;
+	background: url('../background/titlebar.png') repeat-x;
+	color: #dfdfdf;
+	font-size: 18px;
+	padding: 4px 0 14px 12px;
+	margin: 0px;
+	font-weight: normal;
+}
+
+.SetupWizardPopup .Content {
+	padding: 8px 30px 8px 30px;
+	height: 321px;
+}
+
+
+.SetupWizardPopup .form-inline {
+  padding: 15px 0 15px 0;
+}
+
+
+.SetupWizardPopup .progress {
+  margin: 5px 0 0 18px;
+}
+
+
+
+/**
+ * Screens specificities
+ */
+
+.Setup .table {
+  font-size: 13px;
+}
+
+.Setup .languageLabel {
+  width: 170px;
+  font-weight: bold;
+}
+
+.Setup .languageOptions {
+  margin-left: 180px;
+}
+
+.Setup .BlockTable {
+  height: 210px;
+  overflow-y: scroll;
+  margin-bottom: 27px;
+}
+
+.SetupType .control-group {
+  padding: 50px 0 0 50px;
+}
+
+.SetupType form {
+  margin: 40px 0 0 40px;
+}
+
+.SetupType label {
+  padding: 20px 0 20px 0;
+}
+
+.IdmSetup .control-group {
+  padding: 0 0 0 50px;
+}
+
+.IdmSetup .radio {
+  margin: 20px 20px 20px 20px;
+}
+
+.Website .website {
+  padding: 25px 0 10px 0;
+}
+
+.Summary .BlockTable {
+  height: 250px;
+  overflow-y: scroll;
+  margin-bottom: 27px;
+}
+
+.Finish .progress {
+  margin: 50px 0 50px 0;
+}
+ 
+ 
