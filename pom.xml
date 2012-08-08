@@ -11,11 +11,11 @@
   -->
   
   
-  <groupId>com.exoplatform.setting</groupId>
-  <artifactId>setting-wizard-parent</artifactId>
+  <groupId>org.exoplatform.setup</groupId>
+  <artifactId>setup-wizard-parent</artifactId>
   <version>0.9-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>eXo Platform Settings</name>
+  <name>eXo Platform Setup</name>
   
   
   <properties>
@@ -26,6 +26,8 @@
     
     <org.exoplatform.kernel.version>2.3.0-CR4-CP01</org.exoplatform.kernel.version>
     <commons-configuration.version>1.7</commons-configuration.version>
+    <javax.ws.rs.version>1.0</javax.ws.rs.version>
+		<org.exoplatform.ws.version>2.2.8-GA-SNAPSHOT</org.exoplatform.ws.version>
   </properties>
   
   
@@ -52,12 +54,22 @@
         <artifactId>commons-configuration</artifactId>
         <version>${commons-configuration.version}</version>
       </dependency>
+      <dependency>
+        <groupId>javax.ws.rs</groupId>
+        <artifactId>jsr311-api</artifactId>
+        <version>${javax.ws.rs.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.rest.core</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   
   
   <modules>
-    <module>exo-setting</module>
+    <module>exo-setup</module>
   </modules>
   
 </project>
