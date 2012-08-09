@@ -28,6 +28,7 @@
     <commons-configuration.version>1.7</commons-configuration.version>
     <javax.ws.rs.version>1.0</javax.ws.rs.version>
 		<org.exoplatform.ws.version>2.2.8-GA-SNAPSHOT</org.exoplatform.ws.version>
+		<org.exoplatform.log4j.version>1.2.14</org.exoplatform.log4j.version>
   </properties>
   
   
@@ -63,6 +64,11 @@
         <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.rest.core</artifactId>
         <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>${org.exoplatform.log4j.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
