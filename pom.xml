@@ -26,9 +26,10 @@
     
     <org.exoplatform.kernel.version>2.3.0-CR4-CP01</org.exoplatform.kernel.version>
     <commons-configuration.version>1.7</commons-configuration.version>
-    <javax.ws.rs.version>1.0</javax.ws.rs.version>
+    <javax.ws.rs.version>1.1</javax.ws.rs.version>
 		<org.exoplatform.ws.version>2.2.8-GA-SNAPSHOT</org.exoplatform.ws.version>
 		<org.exoplatform.log4j.version>1.2.14</org.exoplatform.log4j.version>
+    <servlet.api.version>2.5</servlet.api.version>
   </properties>
   
   
@@ -42,7 +43,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
-        <version>2.5</version>
+        <version>${servlet.api.version}</version>
         <type>jar</type>
       </dependency>
       <dependency>

@@ -27,6 +27,22 @@
       <artifactId>commons-configuration</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.setup</groupId>
+      <artifactId>setup-wizard-config</artifactId>
+      <version>0.9-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
   </dependencies>
   
   <build>

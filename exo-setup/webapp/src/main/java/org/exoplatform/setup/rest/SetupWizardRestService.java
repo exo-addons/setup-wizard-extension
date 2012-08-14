@@ -1,39 +1,40 @@
 package org.exoplatform.setup.rest;
 
+import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
-import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.commons.utils.SecurityHelper;
+import org.exoplatform.container.RootContainer;
 import org.exoplatform.setup.data.SetupWizardData;
 import org.exoplatform.setup.data.StartupInformationDto;
 import org.exoplatform.setup.data.WizardPropertiesException;
+import org.exoplatform.setup.service.WizardTailService;
 import org.exoplatform.setup.util.WizardProperties;
 import org.exoplatform.setup.util.WizardUtility;
 
 @Path(SetupWizardRestService.WS_ROOT_PATH)
-public class SetupWizardRestService implements ResourceContainer {
+public class SetupWizardRestService {
   
   private static Logger logger = Logger.getLogger(SetupWizardRestService.class);
 
-  protected final static String WS_ROOT_PATH = "/setuprest";
+  protected final static String WS_ROOT_PATH = "/service";
   
   @GET
   @Path("/pp")
@@ -52,13 +53,12 @@ public class SetupWizardRestService implements ResourceContainer {
   @POST
   @Path("/wp")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response writeProperties(@PathParam("toto") String toto, @Context UriInfo uriInfo) {
+  @Consumes("application/x-www-form-urlencoded")
+  public Response writeProperties(MultivaluedMap<String, String> queryParams) {
     
     if(logger.isDebugEnabled()) {
       logger.debug("writeProperties is called");
     }
-    
-    MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
 
     if(queryParams != null && queryParams.size() > 0) {
       try {
@@ -103,7 +103,38 @@ public class SetupWizardRestService implements ResourceContainer {
   @Path("/sp")
   @Produces(MediaType.APPLICATION_JSON)
   public Response startPlatform() {
-    return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
+    
+    logger.debug("startPlatform is called");
+    
+    boolean isOk = false;
+    
+    try {
+      // Start the server into a Thread
+      Thread t = new Thread() {
+        public void run() {
+          final RootContainer rootContainer = RootContainer.getInstance();
+          SecurityHelper.doPrivilegedAction(new PrivilegedAction<Void>() {
+            public Void run() {
+               rootContainer.createPortalContainers();
+               return null;
+            }
+          });
+        }
+      };
+      t.start();
+      isOk = true;
+    }
+    catch(Exception e) {
+      logger.error("Cannot start platform", e);
+    }
+    
+    if(isOk) {
+      // Launches tail(s)
+      List<String> logsServerPath = WizardProperties.getExoLogsServerPath(WizardUtility.getCurrentServerName());
+      WizardTailService.getInstance().launchesTails(WizardUtility.formatExoServerLogsPath(logsServerPath));
+    }
+    
+    return Response.ok(isOk ? "ok" : "nok", MediaType.APPLICATION_JSON).build();
   }
   
   @GET
