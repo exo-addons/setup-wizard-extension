@@ -22,13 +22,21 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 import org.exoplatform.commons.utils.SecurityHelper;
 import org.exoplatform.container.RootContainer;
+import org.exoplatform.setup.data.ImportantLogsDto;
 import org.exoplatform.setup.data.SetupWizardData;
 import org.exoplatform.setup.data.StartupInformationDto;
 import org.exoplatform.setup.data.WizardPropertiesException;
 import org.exoplatform.setup.service.WizardTailService;
 import org.exoplatform.setup.util.WizardProperties;
 import org.exoplatform.setup.util.WizardUtility;
+import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
+/**
+ * This class contains all WS used by Setup Wizard application
+ * 
+ * @author Clement
+ *
+ */
 @Path(SetupWizardRestService.WS_ROOT_PATH)
 public class SetupWizardRestService {
   
@@ -50,6 +58,11 @@ public class SetupWizardRestService {
     return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
   }
   
+  /**
+   * This WS permit to write properties configured by user, into the exo configuration file.
+   * @param queryParams
+   * @return
+   */
   @POST
   @Path("/wp")
   @Produces(MediaType.APPLICATION_JSON)
@@ -99,6 +112,11 @@ public class SetupWizardRestService {
     return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
   }
   
+  /**
+   * This WS launches the portal container. If launch is well done, the string "ok" is returned. 
+   * Else "nok" is returned.
+   * @return
+   */
   @GET
   @Path("/sp")
   @Produces(MediaType.APPLICATION_JSON)
@@ -137,13 +155,37 @@ public class SetupWizardRestService {
     return Response.ok(isOk ? "ok" : "nok", MediaType.APPLICATION_JSON).build();
   }
   
+  /**
+   * During Portal starting, server logs are written into files. this WS permit to get some of these logs.
+   * Like errors or exceptions.
+   * @return
+   */
+  @BadgerFish
   @GET
   @Path("/il")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getImportantServerLogs() {
-    return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
+    
+    if(logger.isDebugEnabled()) {
+      logger.debug("getImportantServerLogs is called");
+    }
+
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    cacheControl.setNoStore(true);
+    
+    ImportantLogsDto dto = new ImportantLogsDto();
+    dto.setLogs(WizardTailService.getInstance().getElements());
+    
+    return Response.ok().entity(dto).cacheControl(cacheControl).build();
   }
   
+  /**
+   * WS used to get all usefull information before setup display
+   * <p>
+   * like all existing exo properties, or debug information
+   * @return
+   */
   @GET
   @Path("/si")
   @Produces(MediaType.APPLICATION_JSON)
