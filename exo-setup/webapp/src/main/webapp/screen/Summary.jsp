@@ -49,14 +49,16 @@
       </div>
       
       <div class="ButtonContent">
-        <div class="row">
-          <div class="span1">
-            <input class="btn btn-success" type="submit" value="Export">
-          </div>
-          <div class="span4 offset1">
+        <table width="100%">
+          <tr>
+            <td width="20%">
+              <input class="btn btn-success" type="submit" value="Export">
+            </td>
+            <td width="80%">
             <input class="btn" type="submit" value="Previous" onclick="SetupWizard.showStep(8);">
             <input class="btn btn-primary" type="submit" value="Next" onclick="SetupWizard.validateStep9();">
-          </div>
-        </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>

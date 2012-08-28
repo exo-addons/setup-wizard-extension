@@ -57,16 +57,18 @@
       </div>
       
       <div class="ButtonContent">
-        <div class="row">
-          <div class="span4">
-            <div class="progress progress-striped">
-              <div class="bar" style="width: 50%;"></div>
-            </div>
-          </div>
-          <div class="span2">
+        <table width="100%">
+          <tr>
+            <td width="70%">
+              <div class="progress progress-striped">
+                <div class="bar" style="width: 50%;"></div>
+              </div>
+            </td>
+            <td width="30%">
             <input class="btn" type="submit" value="Previous" onclick="SetupWizard.showStep(3);">
             <input class="btn btn-primary" type="submit" value="Next" onclick="SetupWizard.validateStep4();">
-          </div>
-        </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>

@@ -71,6 +71,7 @@ body {
 .Setup .languageLabel {
   width: 170px;
   font-weight: bold;
+  font-size: 13px;
 }
 
 .Setup .languageOptions {

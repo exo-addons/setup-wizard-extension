@@ -64,16 +64,19 @@
       </div>
       
       <div class="ButtonContent">
-        <div class="row">
-          <div class="span4">
-            <div class="progress progress-striped">
-              <div class="bar" style="width: 12.5%;"></div>
-            </div>
-          </div>
-          <div class="span2">
-            <input class="btn btn-inverse" type="submit" value="Skip wizard" onclick="SetupWizard.exit();">
-            <input class="btn btn-primary" type="submit" value="Start" onclick="SetupWizard.validateStep1();" >
-          </div>   
+        <table width="100%">
+          <tr>
+            <td width="70%">
+              <div class="progress progress-striped">
+                <div class="bar" style="width: 12.5%;"></div>
+              </div>
+            </td>
+            <td width="30%">
+              <input class="btn btn-inverse" type="submit" value="Skip wizard" onclick="SetupWizard.exit();">
+              <input class="btn btn-primary" type="submit" value="Start" onclick="SetupWizard.validateStep1();" >
+            </td>
+          </tr>
+        </table> 
         </div>     
 
       </div>
