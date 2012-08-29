@@ -63,6 +63,7 @@ public class SetupWizardRestService {
    * @param queryParams
    * @return
    */
+  @BadgerFish
   @POST
   @Path("/wp")
   @Produces(MediaType.APPLICATION_JSON)
@@ -72,6 +73,10 @@ public class SetupWizardRestService {
     if(logger.isDebugEnabled()) {
       logger.debug("writeProperties is called");
     }
+    
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    cacheControl.setNoStore(true);
 
     if(queryParams != null && queryParams.size() > 0) {
       try {
@@ -109,7 +114,7 @@ public class SetupWizardRestService {
       }
     }
     
-    return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
+    return Response.ok().cacheControl(cacheControl).build();
   }
   
   /**
@@ -117,12 +122,19 @@ public class SetupWizardRestService {
    * Else "nok" is returned.
    * @return
    */
+  @BadgerFish
   @GET
   @Path("/sp")
   @Produces(MediaType.APPLICATION_JSON)
   public Response startPlatform() {
+
+    if(logger.isDebugEnabled()) {
+      logger.debug("startPlatform is called");
+    }
     
-    logger.debug("startPlatform is called");
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    cacheControl.setNoStore(true);
     
     boolean isOk = false;
     
@@ -152,7 +164,7 @@ public class SetupWizardRestService {
       WizardTailService.getInstance().launchesTails(WizardUtility.formatExoServerLogsPath(logsServerPath));
     }
     
-    return Response.ok(isOk ? "ok" : "nok", MediaType.APPLICATION_JSON).build();
+    return Response.ok().entity(isOk ? "ok" : "nok").cacheControl(cacheControl).build();
   }
   
   /**
@@ -186,6 +198,7 @@ public class SetupWizardRestService {
    * like all existing exo properties, or debug information
    * @return
    */
+  @BadgerFish
   @GET
   @Path("/si")
   @Produces(MediaType.APPLICATION_JSON)
@@ -226,7 +239,7 @@ public class SetupWizardRestService {
       logger.error("Cannot get startup informations: " + e.getMessage(), e);
     }
     
-    return Response.ok(dto, MediaType.APPLICATION_JSON).cacheControl(cacheControl).build();
+    return Response.ok().entity(dto).cacheControl(cacheControl).build();
   }
   
   /**

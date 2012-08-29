@@ -3,6 +3,9 @@ package org.exoplatform.setup.data;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "StartupInformationDto")
 public class StartupInformationDto implements Serializable {
 
   private static final long serialVersionUID = 1L;
