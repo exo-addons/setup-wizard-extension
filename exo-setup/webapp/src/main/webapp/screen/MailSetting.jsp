@@ -6,41 +6,41 @@
           <div class="form-horizontal">
             <fieldset>
               <div class="control-group">
-                <label class="control-label" for="control_6_1">SMTP Host</label>
+                <label class="control-label" for="inputMailSmtpHost">SMTP Host</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="control_6_1">
+                  <input type="text" class="input-xlarge" id="inputMailSmtpHost">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="control_6_2">Port</label>
+                <label class="control-label" for="inputMailPort">Port</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="control_6_2">
+                  <input type="text" class="input-xlarge" id="inputMailPort">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="optionsCheckbox">Secured connection</label>
+                <label class="control-label" for="checkboxMailSecure">Secured connection</label>
                 <div class="controls">
                   <label class="checkbox">
-                    <input type="checkbox" id="optionsCheckbox" value="option6">
+                    <input type="checkbox" id="checkboxMailSecure" value="secured_connection">
                   </label>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="control_6_3">Username</label>
+                <label class="control-label" for="inputMailUserName">Username</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="control_6_3">
+                  <input type="text" class="input-xlarge" id="inputMailUserName">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="control_6_4">Password</label>
+                <label class="control-label" for="inputMailPassword">Password</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="control_6_4">
+                  <input type="text" class="input-xlarge" id="inputMailPassword">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="control_6_5">Email</label>
+                <label class="control-label" for="inputMailMailEmail">Email</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="control_6_5">
+                  <input type="text" class="input-xlarge" id="inputMailEmail">
                 </div>
               </div>
             </fieldset>

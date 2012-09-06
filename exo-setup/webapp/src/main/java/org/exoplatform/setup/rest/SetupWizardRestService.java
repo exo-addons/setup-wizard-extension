@@ -70,6 +70,8 @@ public class SetupWizardRestService {
   @Consumes("application/x-www-form-urlencoded")
   public Response writeProperties(MultivaluedMap<String, String> queryParams) {
     
+    boolean isOk = false;
+    
     if(logger.isDebugEnabled()) {
       logger.debug("writeProperties is called");
     }
@@ -102,6 +104,7 @@ public class SetupWizardRestService {
           }
         }
         exoConf.save();
+        isOk = true;
       }
       catch (ConfigurationException e) {
         logger.error("Cannot save Properties configuration", e);
@@ -114,7 +117,7 @@ public class SetupWizardRestService {
       }
     }
     
-    return Response.ok().cacheControl(cacheControl).build();
+    return Response.ok(isOk ? "ok" : "nok").cacheControl(cacheControl).build();
   }
   
   /**

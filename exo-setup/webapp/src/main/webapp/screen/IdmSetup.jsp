@@ -6,11 +6,11 @@
           <div class="control-group">
             <div class="controls">
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
+                <input type="radio" name="radioIdmSetup" id="radioIdmSetup1" value="database" checked="" />
                 <strong>Database</strong>
               </label>
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
+                <input type="radio" name="radioIdmSetup" id="radioIdmSetup2" value="ldap" />
                 <strong>LDAP</strong>
               </label>
             </div>

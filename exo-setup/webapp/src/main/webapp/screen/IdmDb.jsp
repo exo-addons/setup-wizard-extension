@@ -12,14 +12,14 @@
           <div class="span2">
             <div class="form-inline">
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <input type="radio" name="radioIdmDs" id="radioIdmDs1" value="optionIdm1" checked="">
                 Choose a datasource:
               </label>
             </div>
           </div>
           <div class="span2">
             <div class="form-inline">
-              <select id="select03">
+              <select id="selectIdmDs">
                 <option>Ds1</option>
                 <option>Ds2</option>
               </select>
@@ -31,25 +31,14 @@
           <div class="span2">
             <div class="form-inline">
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <input type="radio" name="radioIdmDs" id="radioIdmDs2" value="optionIdm2">
                 Set your own datasource:
               </label>
             </div>
           </div>
           <div class="span2">
             <div class="form-inline">
-              <input type="text" class="input-xmedium" id="input01">
-            </div>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="span4">
-            <div class="form-inline">
-              <label class="checkbox">
-                <input type="checkbox" id="optionsCheckbox" value="option1">
-                Store files in database
-              </label>
+              <input type="text" class="input-xmedium" id="inputIdmDs">
             </div>
           </div>
         </div>

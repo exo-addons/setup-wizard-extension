@@ -72,7 +72,7 @@
               </div>
             </td>
             <td width="30%">
-              <input class="btn btn-inverse" type="submit" value="Skip" onclick="SetupWizard.exit();">
+              <input class="btn btn-inverse" type="submit" value="Skip wizard" onclick="SetupWizard.exit();">
               <input class="btn btn-primary" type="submit" value="Start" onclick="SetupWizard.validateStep1();" >
             </td>
           </tr>
