@@ -7,7 +7,7 @@
           <div class="span5">
             <div class="form-inline">
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <input type="radio" name="radioWebsite" id="radioWebsiteBlank" value="radioWebsite1" checked="">
                 Start with a blank portal
               </label>
             </div>
@@ -18,7 +18,7 @@
           <div class="span2">
             <div class="form-inline">
               <label class="radio">
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                <input type="radio" name="radioWebsite" id="radioWebsiteInstall" value="radioWebsite2">
                 Install a sample
               </label>
             </div>
@@ -26,15 +26,15 @@
           <div class="span3">
             <div class="form-horizontal">
               <label class="checkbox">
-                <input type="checkbox" name="optionsCheckboxList1" value="option1">
+                <input type="checkbox" name="optionsWebSite" value="acme">
                 ACME
               </label>
               <label class="checkbox">
-                <input type="checkbox" name="optionsCheckboxList2" value="option2">
+                <input type="checkbox" name="optionsWebSite" value="default">
                 Default
               </label>
               <label class="checkbox">
-                <input type="checkbox" name="optionsCheckboxList3" value="option3">
+                <input type="checkbox" name="optionsWebSite" value="intranet">
                 Intranet
               </label>
             </div>

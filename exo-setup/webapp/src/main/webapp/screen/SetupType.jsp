@@ -7,12 +7,12 @@
               <div class="control-group">
                 <div class="controls">
                   <label class="radio">
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                    <input type="radio" name="setupTypeOptions" id="setupTypeOptions1" value="standard" checked="">
                     <strong>Standard</strong> (Recommended)<br />
                     Display standard options that most administrators have to
                   </label>
                   <label class="radio">
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" name="setupTypeOptions" id="setupTypeOptions2" value="advanced">
                     <strong>Advanced</strong><br />
                     Display All advanced options, like JCR cache & indexer
                   </label>

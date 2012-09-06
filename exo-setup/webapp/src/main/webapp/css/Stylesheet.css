@@ -15,7 +15,7 @@ body {
 .SetupWizardPopup {
 	border-radius: 4px;
 	box-shadow: 1px 2px 6px #a3a6a7;
-	width: 590px; height: 460px;
+	width: 590px;
 	background: white;
   margin: 0 auto;
 }
@@ -28,7 +28,7 @@ body {
 
 .SetupWizardPopup .ButtonContent{
 	border-radius: 0 0 4px 4px;
-	background: url('../background/ButtonBGCT.png') repeat-x;
+	background: url('../background/ButtonBGCT.png') #F2F2F2 repeat-x;
 	text-align: right;
 	padding: 26px 20px 26px 0px;
 }
