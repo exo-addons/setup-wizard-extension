@@ -30,7 +30,6 @@
     <dependency>
       <groupId>commons-configuration</groupId>
       <artifactId>commons-configuration</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
        <groupId>log4j</groupId>

@@ -1,35 +1,25 @@
 package org.exoplatform.setup.rest;
 
-import java.security.PrivilegedAction;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.CacheControl;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.log4j.Logger;
 import org.exoplatform.commons.utils.SecurityHelper;
 import org.exoplatform.container.RootContainer;
-import org.exoplatform.setup.data.ImportantLogsDto;
-import org.exoplatform.setup.data.SetupWizardData;
-import org.exoplatform.setup.data.StartupInformationDto;
-import org.exoplatform.setup.data.WizardPropertiesException;
+import org.exoplatform.setup.data.*;
 import org.exoplatform.setup.service.WizardTailService;
 import org.exoplatform.setup.util.WizardProperties;
 import org.exoplatform.setup.util.WizardUtility;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
+
+import javax.naming.*;
+import javax.sql.DataSource;
+import javax.ws.rs.*;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import java.security.PrivilegedAction;
+import java.util.*;
 
 /**
  * This class contains all WS used by Setup Wizard application
@@ -43,19 +33,84 @@ public class SetupWizardRestService {
   private static Logger logger = Logger.getLogger(SetupWizardRestService.class);
 
   protected final static String WS_ROOT_PATH = "/service";
-  
+
+  /**
+   * This WS permits to get the properties of the user's machine in order to display it in the first screen.
+   */
+  @BadgerFish
   @GET
   @Path("/pp")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getSystemProperties() {
-    return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
+    logger.debug("Client calls server method: getSystemProperties");
+
+    Map<String, String> map = new LinkedHashMap<String, String>();
+
+    // Get server name
+    map.put("server.name", WizardUtility.getCurrentServerName());
+    map.put("server.home", WizardUtility.getCurrentServerHome());
+
+    // Get some system properties
+    map.put("exo.conf.dir.name", System.getProperty("exo.conf.dir.name"));
+    map.put("exo.product.developing", System.getProperty("exo.product.developing"));
+    map.put("exo.profiles", System.getProperty("exo.profiles"));
+    map.put("file.encoding", System.getProperty("file.encoding"));
+    map.put("gatein.data.dir", System.getProperty("gatein.data.dir"));
+    map.put("java.home", System.getProperty("java.home"));
+    map.put("java.runtime.name", System.getProperty("java.runtime.name"));
+    map.put("java.runtime.version", System.getProperty("java.runtime.version"));
+    map.put("java.specification.version", System.getProperty("java.specification.version"));
+    map.put("java.version", System.getProperty("java.version"));
+    map.put("os.arch", System.getProperty("os.arch"));
+    map.put("os.name", System.getProperty("os.name"));
+    map.put("os.version", System.getProperty("os.version"));
+    map.put("user.country", System.getProperty("user.country"));
+    map.put("user.dir", System.getProperty("user.dir"));
+    map.put("user.home", System.getProperty("user.home"));
+    map.put("user.language", System.getProperty("user.language"));
+    map.put("user.name", System.getProperty("user.name"));
+
+    return Response.ok(new SystemPropertiesDto(map), MediaType.APPLICATION_JSON).build();
   }
-  
+
+  /**
+   *  This WS permits to get the Datasources defined in the server.
+   */
+  @BadgerFish
   @GET
   @Path("/ds")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getDatasources() {
-    return Response.ok(Collections.emptyList(), MediaType.APPLICATION_JSON).build();
+    // Get JNDI Name according to the sever name
+    String DATASOURCE_CONTEXT = WizardUtility.getDatasourceJndiName(WizardUtility.getCurrentServerName());
+    String DATASOURCE_CONTEXT_PP_NAME = WizardUtility.getDatasourceJndiPropertyName(WizardUtility.getCurrentServerName());
+
+    List<String> datasources = new ArrayList<String>();
+
+    if(DATASOURCE_CONTEXT != null) {
+        try {
+            Context initialContext = new InitialContext();
+            Context namingContext = (Context) initialContext.lookup(DATASOURCE_CONTEXT);
+            if (namingContext != null) {
+                NamingEnumeration<Binding> nenum = namingContext.listBindings("");
+                while(nenum.hasMore()) {
+                    Binding binding = (Binding) nenum.next();
+                    Object ds = namingContext.lookup(binding.getName());
+                    if(ds instanceof DataSource) {
+                        datasources.add(DATASOURCE_CONTEXT + WizardUtility.filterWithGateinSpecificity(binding.getName()));
+                    }
+                  }
+              }
+              else {
+                  logger.error("Failed to lookup datasource.");
+              }
+        }
+        catch (NamingException ex) {
+            logger.error("Cannot get connection, maybe datasource jndi name is not correct (" + DATASOURCE_CONTEXT + "). Try to change property (" + DATASOURCE_CONTEXT_PP_NAME + ")");
+        }
+    }
+
+    return Response.ok(new DatasourcesDto(datasources), MediaType.APPLICATION_JSON).build();
   }
   
   /**
