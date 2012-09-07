@@ -37,7 +37,12 @@
       <div class="ButtonContent">
         <table width="100%">
           <tr>
-            <td width="70%">
+            <td width="4%">
+              <div class="loader_ctr">
+                <div class="loader"></div>
+              </div>
+            </td>
+            <td width="66%">
               <div class="progress progress-striped">
                 <div class="bar" style="width: 37.5%;"></div>
               </div>
