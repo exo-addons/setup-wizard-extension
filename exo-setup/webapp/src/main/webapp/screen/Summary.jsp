@@ -51,7 +51,12 @@
       <div class="ButtonContent">
         <table width="100%">
           <tr>
-            <td width="20%">
+            <td width="5%">
+              <div class="loader_ctr">
+                <div class="loader"></div>
+              </div>
+            </td>
+            <td width="15%">
               <input class="btn btn-success" type="submit" value="Export">
             </td>
             <td width="80%">

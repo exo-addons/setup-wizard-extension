@@ -91,6 +91,24 @@ SetupWizard.showError = function(error) {
   }
 }
 
+SetupWizard.displayLoader = function(noScreen) {
+  $('#setup' + noScreen + ' .loader_ctr').show();
+  SetupWizard.lockScreen(noScreen);
+}
+
+SetupWizard.hideLoader = function(noScreen) {
+  $('#setup' + noScreen + ' .loader_ctr').hide();
+  SetupWizard.unlockScreen(noScreen);
+}
+
+SetupWizard.lockScreen = function(noScreen) {
+  $("#setup" + noScreen + " input").attr("disabled", true);
+}
+
+SetupWizard.unlockScreen = function(noScreen) {
+  $("#setup" + noScreen + " input").attr("disabled", false);
+}
+
 
 /*===========================================================================================================*
  *       VALIDATION METHODS
@@ -158,6 +176,11 @@ SetupWizard.validateStep3 = function() {
  */
 SetupWizard.validateStep4 = function() {
 
+  if(SetupWizard.DEBUG_MODE) {
+    SetupWizard.showStep(5);
+    return;
+  }
+
   var ownDsIsChecked = ($("input[id='radioJcrOwnDs']:checked").length > 0);
   var inputDs = $("#inputJcrDs").val();
   var selectDs = $("#selectJcrDs").val();
@@ -201,6 +224,11 @@ SetupWizard.validateStep5 = function() {
  */
 SetupWizard.validateStep6 = function() {
 
+  if(SetupWizard.DEBUG_MODE) {
+    SetupWizard.showStep(7);
+    return;
+  }
+
   var ownDsIsChecked = ($("input[id='radioIdmDs2']:checked").length > 0);
   var inputDs = $("#inputIdmDs").val();
   var selectDs = $("#selectIdmDs").val();
@@ -230,6 +258,11 @@ SetupWizard.validateStep6 = function() {
  * MailSetting
  */
 SetupWizard.validateStep7 = function() {
+
+  if(SetupWizard.DEBUG_MODE) {
+    SetupWizard.showStep(8);
+    return;
+  }
   
   var inputSmtpHost  = $("#inputMailSmtpHost").val();
   var inputPort      = $("#inputMailPort").val();
@@ -274,6 +307,11 @@ SetupWizard.validateStep7 = function() {
  * Website
  */
 SetupWizard.validateStep8 = function() {
+
+  if(SetupWizard.DEBUG_MODE) {
+    SetupWizard.showStep(9);
+    return;
+  }
   
   var radioWebsiteBlank = ($("input[id='radioWebsiteBlank']:checked").length > 0);
   var radioWebsiteInstall = ($("input[id='radioWebsiteInstall']:checked").length > 0);
@@ -298,6 +336,14 @@ SetupWizard.validateStep8 = function() {
  */
 SetupWizard.validateStep9 = function() {
 
+  if(SetupWizard.DEBUG_MODE) {
+    SetupWizard.showStep(10);
+    return;
+  }
+
+  // display loader
+  SetupWizard.displayLoader(9);
+  
   // Validate Form with WS writeProperties, if response is ok, call WS startPlatform and display next screen
   $.post(
     "/setup/setuprest/service/wp", 
@@ -306,11 +352,14 @@ SetupWizard.validateStep9 = function() {
     "json"
   )
   .complete(function(data) {
+    SetupWizard.hideLoader(9);
     if(data.responseText == "ok") {
+      SetupWizard.displayLoader(9);
       $.ajax({
         url: "/setup/setuprest/service/sp"
       })
       .always(function (data) {
+        SetupWizard.hideLoader(9);
         if(data.responseText == "ok") {
           SetupWizard.showStep(10);
         }
@@ -335,7 +384,9 @@ SetupWizard.validateStep10 = function() {
 }
 
 SetupWizard.exit = function() {
-  $("#SetupExitForm").submit();
+  
+  SetupWizard.showStep(1);
+  // TODO redirect to portal home page
 }
 
 

@@ -34,9 +34,6 @@
     <title>Welcome to eXo Platform</title>
     
     <link href="<%=contextPath%>/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="<%=contextPath%>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="<%=contextPath%>/bootstrap/css/docs.css" rel="stylesheet">
-    <link href="<%=contextPath%>/bootstrap/css/prettify.css" rel="stylesheet">
     
     <link href="<%=contextPath%>/css/Stylesheet.css" rel="stylesheet" type="text/css" />
 		<link rel="shortcut icon" type="image/png" href="<%=contextPath%>/favicon.png" />
@@ -61,7 +58,6 @@
     </div>
     
     <div id="setup1" class="SetupWizardPopup">
-    
       <%@ include file="screen/Setup.jsp"%>
     </div>
 

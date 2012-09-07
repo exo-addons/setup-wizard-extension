@@ -55,14 +55,19 @@
       <div class="ButtonContent">
         <table width="100%">
           <tr>
-            <td width="70%">
+            <td width="4%">
+              <div class="loader_ctr">
+                <div class="loader"></div>
+              </div>
+            </td>
+            <td width="66%">
               <div class="progress progress-striped">
               <div class="bar" style="width: 100%;"></div>
               </div>
             </td>
             <td width="30%">
             <input class="btn" type="submit" value="Previous" onclick="SetupWizard.showStep(7);">
-            <input class="btn btn-primary" type="submit" value="Next" onclick="SetupWizard.validateStep8();">
+            <input id="toto" class="btn btn-primary" type="submit" value="Next" onclick="SetupWizard.validateStep8();">
             </td>
           </tr>
         </table>
