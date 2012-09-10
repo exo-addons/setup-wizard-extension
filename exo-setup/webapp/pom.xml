@@ -54,7 +54,7 @@
 	  </dependency>
       <dependency>
           <groupId>org.exoplatform.setup</groupId>
-          <artifactId>setup-wizard-config</artifactId>
+          <artifactId>setup-wizard-component</artifactId>
           <version>0.9-SNAPSHOT</version>
       </dependency>
   </dependencies>

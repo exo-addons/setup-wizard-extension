@@ -16,7 +16,7 @@
   <description>eXo Platform Setup :: Wizard</description>
 
   <modules>
-    <module>config</module>
+    <module>component</module>
     <module>webapp</module>
   </modules>
 </project>

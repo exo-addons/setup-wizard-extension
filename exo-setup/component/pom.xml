@@ -7,9 +7,9 @@
     <version>0.9-SNAPSHOT</version>
   </parent>
   
-  <artifactId>setup-wizard-config</artifactId>
+  <artifactId>setup-wizard-component</artifactId>
   <packaging>jar</packaging>
-  <name>eXo Platform Setup :: Wizard Config</name>
+  <name>eXo Platform Setup :: Wizard Component</name>
   
   <dependencies>
     <dependency>
