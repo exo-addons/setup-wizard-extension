@@ -37,6 +37,30 @@ SetupWizard.SMTP_EMAIL="smtp_email";
 SetupWizard.WS_BLANK="ws_blank";
 SetupWizard.WS_SAMPLES="ws_samples";
 
+SetupWizard.JSON_PP = [];
+SetupWizard.JSON_PP[SetupWizard.SU_USERNAME] = "Super User name";
+SetupWizard.JSON_PP[SetupWizard.SU_PASSWORD] = "Super User Password";
+SetupWizard.JSON_PP[SetupWizard.SU_EMAIL] = "Super User email";
+SetupWizard.JSON_PP[SetupWizard.JCR_DATA_SOURCE] = "JCR data source";
+SetupWizard.JSON_PP[SetupWizard.STORE_FILES_IN_DB] = "File stored in DB";
+SetupWizard.JSON_PP[SetupWizard.IDM_DATA_SOURCE] = "IDM data source";
+SetupWizard.JSON_PP[SetupWizard.LDAP_SERVER_TYPE] = "LDAP server type";
+SetupWizard.JSON_PP[SetupWizard.LDAP_PROVIDER_URL] = "LDAP provider url";
+SetupWizard.JSON_PP[SetupWizard.LDAP_BASE_DN] = "LDAP base DN";
+SetupWizard.JSON_PP[SetupWizard.LDAP_ROOT_DN] = "LDAP toor DN";
+SetupWizard.JSON_PP[SetupWizard.LDAP_PASSWORD] = "LDAP password";
+SetupWizard.JSON_PP[SetupWizard.FS_LOGS] = "Logs";
+SetupWizard.JSON_PP[SetupWizard.FS_INDEX] = "Index";
+SetupWizard.JSON_PP[SetupWizard.FS_DATA_VALUES] = "Data values";
+SetupWizard.JSON_PP[SetupWizard.SMTP_HOST] = "Smtp host";
+SetupWizard.JSON_PP[SetupWizard.SMTP_PORT] = "Smtp port";
+SetupWizard.JSON_PP[SetupWizard.SMTP_SECURED_CONNECTION] = "Smtp secured connection";
+SetupWizard.JSON_PP[SetupWizard.SMTP_USERNAME] = "Smtp username";
+SetupWizard.JSON_PP[SetupWizard.SMTP_PASSWORD] = "Smtp password";
+SetupWizard.JSON_PP[SetupWizard.SMTP_EMAIL] = "Smtp email";
+SetupWizard.JSON_PP[SetupWizard.WS_BLANK] = "Blank web site";
+SetupWizard.JSON_PP[SetupWizard.WS_SAMPLES] = "Installed web sites";
+
 
 /*===========================================================================================================*
  *       GLOBAL METHODS
@@ -48,6 +72,8 @@ SetupWizard.initSetupWizard = function() {
   console.warn = console.warn || function(){};
   console.error = console.error || function(){};
   console.info = console.info || function(){};
+  
+  //SetupWizard.initStep1();
   
   if(SetupWizard.FIRST_SCREEN != -1) {
     SetupWizard.showStep(SetupWizard.FIRST_SCREEN);
@@ -328,7 +354,30 @@ SetupWizard.validateStep8 = function() {
   SetupWizard.writePropertyInDom(SetupWizard.WS_BLANK, radioWebsiteBlank);
   SetupWizard.writePropertyInDom(SetupWizard.WS_SAMPLES, websites);
   
+  // Call method to init next step
+  SetupWizard.initStep9();
+}
+
+/**
+ * This method is used to initialize step summary with all values entered by user during setup wizard
+ */
+SetupWizard.initStep9 = function() {
+
+  // Begin to show step 9
   SetupWizard.showStep(9);
+  
+  // Lock screen
+  SetupWizard.displayLoader(9);
+  
+  // fetch all inputs into hidden form
+  var inputs = $('#SetupExitForm input');
+  
+  for(var i=0; i<inputs.length; i++) {
+    SetupWizard.writeNewRow('SummaryTable', SetupWizard.JSON_PP[inputs[i].name], inputs[i].value);
+  }
+  
+  // Unlock screen
+  SetupWizard.hideLoader(9);
 }
 
 /**
@@ -415,4 +464,35 @@ SetupWizard.writePropertyInDom = function(ppName, ppValue) {
     }).appendTo('#SetupExitForm');
   }
   return;
+}
+
+/**
+ * Write new row with 2 tds from table with ID #tableId
+ * if line is yet existing, it is not added twice.
+ */
+SetupWizard.writeNewRow = function(tableId, td1, td2) {
+  var elem = $('#' + tableId + ' tbody>tr:last');
+  var newRow = $("<tr><td><strong>" + td1 + "</strong></td><td>" + td2 + "</td></tr>");
+  
+  // Verify existence of row
+  var trs = $('#' + tableId + ' tr');
+  var isExisting = false;
+  for(var i=0; i<trs.length; i++) {
+    var lineTd1 = $(trs[i].children[0]).html();
+    var lineTd2 = $(trs[i].children[1]).html();
+    if(td1 == lineTd1 && td2 == lineTd2) {
+      isExisting = true;
+      break;
+    }
+  }
+  
+  // Add row
+  if(! isExisting) {
+    if(elem != undefined && elem.length > 0) {
+      elem.after(newRow);
+    }
+    else {
+      $('#' + tableId).append(newRow);
+    }
+  }
 }

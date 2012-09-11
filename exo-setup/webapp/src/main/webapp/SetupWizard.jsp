@@ -57,7 +57,7 @@
       </div>
     </div>
     
-    <div id="setup1" class="SetupWizardPopup">
+    <div id="setup1" class="SetupWizardPopup" style="display: none">
       <%@ include file="screen/Setup.jsp"%>
     </div>
 

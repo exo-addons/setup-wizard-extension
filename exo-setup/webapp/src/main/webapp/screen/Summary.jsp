@@ -3,47 +3,7 @@
       <div class="Content">
         <p class="LabelCT">We are ready to setup your portal. please review the information below. We will apply these settings and restart your server</p>
         <div class="BlockTable">
-          <table class="table table-striped">
-            <thead>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Database</td>
-                <td>use Datasource: <strong>PortalIDM</strong></td>
-              </tr>
-              <tr>
-                <td>Super User</td>
-                <td>john (admin@example.org)</td>
-              </tr>
-              <tr>
-                <td>Mail Setting</td>
-                <td>smtp.sample.org</td>
-              </tr>
-              <tr>
-                <td>File System</td>
-                <td>temp:/tmp/exo</td>
-              </tr>
-              <tr>
-                <td>Samples installed</td>
-                <td>ACME, Default</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-            </tbody>
+          <table class="table table-striped" id="SummaryTable">
           </table>
         </div>
       </div>

@@ -121,6 +121,7 @@ body {
   height: 250px;
   overflow-y: scroll;
   margin-bottom: 27px;
+  font-size: 13px;
 }
 
 .Finish .progress {
