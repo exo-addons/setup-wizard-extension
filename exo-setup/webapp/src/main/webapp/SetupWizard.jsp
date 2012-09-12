@@ -57,6 +57,10 @@
       </div>
     </div>
     
+    <div id="global_loader" class="SetupWizardPopup" style="display: none">
+      <div style="text-align:center"><img src="./background/loader.gif" /></div>
+    </div>
+    
     <div id="setup1" class="SetupWizardPopup" style="display: none">
       <%@ include file="screen/Setup.jsp"%>
     </div>

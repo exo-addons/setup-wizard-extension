@@ -4,12 +4,18 @@
  */
 var SetupWizard = {};
 
+/** GLOBAL VARIABLES **/
 SetupWizard.NB_SCREENS = 10;
 SetupWizard.SETUP_TYPE = "standard";
 SetupWizard.SETUP_DB_TYPE = "standard";
 SetupWizard.INPUT_MIN_SIZE = 3;
-SetupWizard.INPUT_MAX_SIZE = 20;
+SetupWizard.INPUT_MAX_SIZE = 40;
 SetupWizard.EMAIL_REGEXP = /^([a-zA-Z0-9_\.\-])+\@((([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+)$/;
+
+/**
+ * SERVER VARIABLES
+ * If his value is undefined, variable is initialized with server one
+ */
 SetupWizard.DEBUG_MODE = false;
 SetupWizard.FIRST_SCREEN = 1;
 
@@ -37,35 +43,42 @@ SetupWizard.SMTP_EMAIL="smtp_email";
 SetupWizard.WS_BLANK="ws_blank";
 SetupWizard.WS_SAMPLES="ws_samples";
 
-SetupWizard.JSON_PP = [];
-SetupWizard.JSON_PP[SetupWizard.SU_USERNAME] = "Super User name";
-SetupWizard.JSON_PP[SetupWizard.SU_PASSWORD] = "Super User Password";
-SetupWizard.JSON_PP[SetupWizard.SU_EMAIL] = "Super User email";
-SetupWizard.JSON_PP[SetupWizard.JCR_DATA_SOURCE] = "JCR data source";
-SetupWizard.JSON_PP[SetupWizard.STORE_FILES_IN_DB] = "File stored in DB";
-SetupWizard.JSON_PP[SetupWizard.IDM_DATA_SOURCE] = "IDM data source";
-SetupWizard.JSON_PP[SetupWizard.LDAP_SERVER_TYPE] = "LDAP server type";
-SetupWizard.JSON_PP[SetupWizard.LDAP_PROVIDER_URL] = "LDAP provider url";
-SetupWizard.JSON_PP[SetupWizard.LDAP_BASE_DN] = "LDAP base DN";
-SetupWizard.JSON_PP[SetupWizard.LDAP_ROOT_DN] = "LDAP toor DN";
-SetupWizard.JSON_PP[SetupWizard.LDAP_PASSWORD] = "LDAP password";
-SetupWizard.JSON_PP[SetupWizard.FS_LOGS] = "Logs";
-SetupWizard.JSON_PP[SetupWizard.FS_INDEX] = "Index";
-SetupWizard.JSON_PP[SetupWizard.FS_DATA_VALUES] = "Data values";
-SetupWizard.JSON_PP[SetupWizard.SMTP_HOST] = "Smtp host";
-SetupWizard.JSON_PP[SetupWizard.SMTP_PORT] = "Smtp port";
-SetupWizard.JSON_PP[SetupWizard.SMTP_SECURED_CONNECTION] = "Smtp secured connection";
-SetupWizard.JSON_PP[SetupWizard.SMTP_USERNAME] = "Smtp username";
-SetupWizard.JSON_PP[SetupWizard.SMTP_PASSWORD] = "Smtp password";
-SetupWizard.JSON_PP[SetupWizard.SMTP_EMAIL] = "Smtp email";
-SetupWizard.JSON_PP[SetupWizard.WS_BLANK] = "Blank web site";
-SetupWizard.JSON_PP[SetupWizard.WS_SAMPLES] = "Installed web sites";
+/** LABELS OF PROPERTIES **/
+SetupWizard.LABELS_PP = {};
+SetupWizard.LABELS_PP[SetupWizard.SU_USERNAME] = "Super User name";
+SetupWizard.LABELS_PP[SetupWizard.SU_PASSWORD] = "Super User Password";
+SetupWizard.LABELS_PP[SetupWizard.SU_EMAIL] = "Super User email";
+SetupWizard.LABELS_PP[SetupWizard.JCR_DATA_SOURCE] = "JCR data source";
+SetupWizard.LABELS_PP[SetupWizard.STORE_FILES_IN_DB] = "File stored in DB";
+SetupWizard.LABELS_PP[SetupWizard.IDM_DATA_SOURCE] = "IDM data source";
+SetupWizard.LABELS_PP[SetupWizard.LDAP_SERVER_TYPE] = "LDAP server type";
+SetupWizard.LABELS_PP[SetupWizard.LDAP_PROVIDER_URL] = "LDAP provider url";
+SetupWizard.LABELS_PP[SetupWizard.LDAP_BASE_DN] = "LDAP base DN";
+SetupWizard.LABELS_PP[SetupWizard.LDAP_ROOT_DN] = "LDAP toor DN";
+SetupWizard.LABELS_PP[SetupWizard.LDAP_PASSWORD] = "LDAP password";
+SetupWizard.LABELS_PP[SetupWizard.FS_LOGS] = "Logs";
+SetupWizard.LABELS_PP[SetupWizard.FS_INDEX] = "Index";
+SetupWizard.LABELS_PP[SetupWizard.FS_DATA_VALUES] = "Data values";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_HOST] = "Smtp host";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_PORT] = "Smtp port";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_SECURED_CONNECTION] = "Smtp secured connection";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_USERNAME] = "Smtp username";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_PASSWORD] = "Smtp password";
+SetupWizard.LABELS_PP[SetupWizard.SMTP_EMAIL] = "Smtp email";
+SetupWizard.LABELS_PP[SetupWizard.WS_BLANK] = "Blank web site";
+SetupWizard.LABELS_PP[SetupWizard.WS_SAMPLES] = "Installed web sites";
+
+/** DEFAULT VALUES OF PROPERTIES **/
+SetupWizard.DEFAULT_VALUES_PP = {};
 
 
 /*===========================================================================================================*
  *       GLOBAL METHODS
  *===========================================================================================================*/
 
+/**
+ * First method called before displaying Setup Wizard
+ */
 SetupWizard.initSetupWizard = function() {
   if (!window.console) console = {};
   console.log = console.log || function(){};
@@ -73,13 +86,130 @@ SetupWizard.initSetupWizard = function() {
   console.error = console.error || function(){};
   console.info = console.info || function(){};
   
-  //SetupWizard.initStep1();
+  SetupWizard.displayGlobalLoader();
   
+  // Ajax request to get all startup informations
+  $.ajax({
+    url: "/setup/setuprest/service/si"
+  })
+  .always(function (data) {
+    SetupWizard.finalizeInitSetupWizard(data);
+  });
+}
+
+/**
+ * Callback method called at the return of ajax request from init method
+ */
+SetupWizard.finalizeInitSetupWizard = function(data) {
+  
+  // Init 2 global variables FIRST_SCREEN & DEBUG_MODE
+  if(data != undefined && data.StartupInformationDto != undefined) {
+    if(SetupWizard.FIRST_SCREEN == undefined && data.StartupInformationDto.firstScreenNumber.$ != undefined) {
+      SetupWizard.FIRST_SCREEN = data.StartupInformationDto.firstScreenNumber.$;
+    }
+    if(SetupWizard.DEBUG_MODE == undefined && data.StartupInformationDto.isDebugActivated.$ != undefined) {
+      SetupWizard.DEBUG_MODE = data.StartupInformationDto.isDebugActivated.$;
+    }
+  
+    // Fetch all properties and fill a table
+    var propertiesValues = data.StartupInformationDto.propertiesValues.entry;
+    if(propertiesValues != undefined) {
+      for(var i=0; i<propertiesValues.length; i++) {
+        SetupWizard.DEFAULT_VALUES_PP[propertiesValues[i].key.$] = propertiesValues[i].value.$;
+      }
+    }
+  }
+  
+  // With pp recovered, pre fill all fields of setup wizard
+  SetupWizard.preFillFields();
+  
+  // hide global loader
+  SetupWizard.hideGlobalLoader();
+  
+  // Display first screen
   if(SetupWizard.FIRST_SCREEN != -1) {
     SetupWizard.showStep(SetupWizard.FIRST_SCREEN);
   }
+}
+
+/**
+ * pre fill all steps which need an initialization
+ */
+SetupWizard.preFillFields = function() {
+
+  // Step3: SuperUser
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_USERNAME] != undefined && $("#inputUsername").val() == "") {
+    $("#inputUsername").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_USERNAME]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_PASSWORD] != undefined && $("#inputPassword").val() == "") {
+    $("#inputPassword").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_PASSWORD]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_PASSWORD] != undefined && $("#inputConfirmPassword").val() == "") {
+    $("#inputConfirmPassword").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_PASSWORD]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_EMAIL] != undefined && $("#inputEmail").val() == "") {
+    $("#inputEmail").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SU_EMAIL]);
+  }
   
-  // TODO Pre fill all screens
+  // Step4: JcrDb
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.STORE_FILES_IN_DB] != undefined) {
+    $("#checkboxStore").attr('checked', SetupWizard.DEFAULT_VALUES_PP[SetupWizard.STORE_FILES_IN_DB]);
+  }
+  
+  // pre fill datasource JCR fields
+  var jcrDs = SetupWizard.DEFAULT_VALUES_PP[SetupWizard.JCR_DATA_SOURCE];
+  if(jcrDs != undefined) {
+    var dss = $.map($("#selectJcrDs").children(),function(a){return a.value;});
+    if($.inArray(jcrDs, dss) < 0) {
+      $("input[id='radioJcrOwnDs']").attr('checked', true);
+      $("#inputJcrDs").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.JCR_DATA_SOURCE]);
+    }
+  }
+  
+  // Step6: IdmDb
+  var idmDs = SetupWizard.DEFAULT_VALUES_PP[SetupWizard.IDM_DATA_SOURCE];
+  if(idmDs != undefined) {
+    var dssIdm = $.map($("#selectIdmDs").children(),function(a){return a.value;});
+    if($.inArray(idmDs, dssIdm) < 0) {
+      $("input[id='radioIdmDs2']").attr('checked', true);
+      $("#inputIdmDs").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.IDM_DATA_SOURCE]);
+    }
+  }
+  
+  // Step7: MailSetting
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_HOST] != undefined && $("#inputMailSmtpHost").val() == "") {
+    $("#inputMailSmtpHost").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_HOST]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_PORT] != undefined && $("#inputMailPort").val() == "") {
+    $("#inputMailPort").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_PORT]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_SECURED_CONNECTION] != undefined) {
+    $("#checkboxMailSecure").attr('checked', SetupWizard.getBoolean(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_SECURED_CONNECTION]));
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_USERNAME] != undefined && $("#inputMailUserName").val() == "") {
+    $("#inputMailUserName").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_USERNAME]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_PASSWORD] != undefined && $("#inputMailPassword").val() == "") {
+    $("#inputMailPassword").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_PASSWORD]);
+  }
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_EMAIL] != undefined && $("#inputMailEmail").val() == "") {
+    $("#inputMailEmail").val(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.SMTP_EMAIL]);
+  }
+  
+  // Step8: Website
+  if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_BLANK] != undefined) {
+    $("#radioWebsiteBlank").attr("checked", SetupWizard.getBoolean(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_BLANK]));
+  }
+  else {
+    $("#radioWebsiteInstall").attr("checked", true);
+    var samples = SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_SAMPLES];
+    if(samples != undefined) {
+      var arrSamples = samples.split(',');
+      for(var i=0; i<arrSamples.length; i++) {
+        $("input[value=" + arrSamples[i] + "]").attr("checked", true);
+      }
+    }
+  }
 }
 
 SetupWizard.showStep = function(n) {
@@ -133,6 +263,14 @@ SetupWizard.lockScreen = function(noScreen) {
 
 SetupWizard.unlockScreen = function(noScreen) {
   $("#setup" + noScreen + " input").attr("disabled", false);
+}
+
+SetupWizard.displayGlobalLoader = function(noScreen) {
+  $('#global_loader').show();
+}
+
+SetupWizard.hideGlobalLoader = function(noScreen) {
+  $('#global_loader').hide();
 }
 
 
@@ -198,7 +336,7 @@ SetupWizard.validateStep3 = function() {
 }
 
 /**
- * JcrDb
+ * JcrDB
  */
 SetupWizard.validateStep4 = function() {
 
@@ -335,7 +473,7 @@ SetupWizard.validateStep7 = function() {
 SetupWizard.validateStep8 = function() {
 
   if(SetupWizard.DEBUG_MODE) {
-    SetupWizard.showStep(9);
+    SetupWizard.beforeStep9();
     return;
   }
   
@@ -355,13 +493,13 @@ SetupWizard.validateStep8 = function() {
   SetupWizard.writePropertyInDom(SetupWizard.WS_SAMPLES, websites);
   
   // Call method to init next step
-  SetupWizard.initStep9();
+  SetupWizard.beforeStep9();
 }
 
 /**
- * This method is used to initialize step summary with all values entered by user during setup wizard
+ * This method needs to be called just before step9, init step summary with all values entered by user during setup wizard
  */
-SetupWizard.initStep9 = function() {
+SetupWizard.beforeStep9 = function() {
 
   // Begin to show step 9
   SetupWizard.showStep(9);
@@ -373,7 +511,7 @@ SetupWizard.initStep9 = function() {
   var inputs = $('#SetupExitForm input');
   
   for(var i=0; i<inputs.length; i++) {
-    SetupWizard.writeNewRow('SummaryTable', SetupWizard.JSON_PP[inputs[i].name], inputs[i].value);
+    SetupWizard.writeNewRow('SummaryTable', SetupWizard.LABELS_PP[inputs[i].name], inputs[i].value);
   }
   
   // Unlock screen
@@ -420,9 +558,7 @@ SetupWizard.validateStep9 = function() {
     else {
       SetupWizard.showError("Impossible to write properties, verify your data and try again.");
     }
-  }); 
-  
-  
+  });
 }
 
 /**
@@ -495,4 +631,11 @@ SetupWizard.writeNewRow = function(tableId, td1, td2) {
       $('#' + tableId).append(newRow);
     }
   }
+}
+
+/**
+ * This method returns a boolean value
+ */
+SetupWizard.getBoolean = function(value) {
+  return (typeof(value)=='string') ? ($.trim(value) == "true" || $.trim(value) == "TRUE") : Boolean(value);
 }

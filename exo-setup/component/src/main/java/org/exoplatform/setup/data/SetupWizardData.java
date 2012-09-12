@@ -9,45 +9,66 @@ package org.exoplatform.setup.data;
 public enum SetupWizardData {
   
   // Super User
-  SU_USERNAME ("exo.super.user"),
-  SU_PASSWORD ("exo.super.user.password"),
-  SU_EMAIL    ("exo.super.user.email"),
+  SU_USERNAME ("su_username", "exo.super.user"),
+  SU_PASSWORD ("su_password", "exo.super.user.password"),
+  SU_EMAIL    ("su_email", "exo.super.user.email"),
   
-  JCR_DATA_SOURCE   ("gatein.jcr.datasource.name"),
-  STORE_FILES_IN_DB ("gatein.jcr.store.files.db"),
+  JCR_DATA_SOURCE   ("jcr_data_source", "gatein.jcr.datasource.name"),
+  STORE_FILES_IN_DB ("store_files_in_db", "gatein.jcr.store.files.db"),
   
-  IDM_DATA_SOURCE ("gatein.idm.datasource.name"),
+  IDM_DATA_SOURCE ("idm_data_source", "gatein.idm.datasource.name"),
 
-  LDAP_SERVER_TYPE  ("ldap.server.type"),
-  LDAP_PROVIDER_URL ("ldap.provider.url"),
-  LDAP_BASE_DN      ("ldap.base.dn"),
-  LDAP_ROOT_DN      ("ldap.root.dn"),
-  LDAP_PASSWORD     ("ldap.password"),
+  LDAP_SERVER_TYPE  ("ldap_server_type", "ldap.server.type"),
+  LDAP_PROVIDER_URL ("ldap_provider_url", "ldap.provider.url"),
+  LDAP_BASE_DN      ("ldap_base_dn", "ldap.base.dn"),
+  LDAP_ROOT_DN      ("ldap_root_dn", "ldap.root.dn"),
+  LDAP_PASSWORD     ("ldap_password", "ldap.password"),
   
-  FS_LOGS        ("filesystem.logs"),
-  FS_INDEX       ("gatein.jcr.index.data.dir"),
-  FS_DATA_VALUES ("gatein.jcr.data.dir"),
+  FS_LOGS        ("fs_logs", "filesystem.logs"),
+  FS_INDEX       ("fs_index", "gatein.jcr.index.data.dir"),
+  FS_DATA_VALUES ("fs_data_values", "gatein.jcr.data.dir"),
   
-  SMTP_HOST               ("gatein.email.smtp.host"),
-  SMTP_PORT               ("gatein.email.smtp.port"),
-  SMTP_SECURED_CONNECTION ("gatein.email.smtp.auth"),
-  SMTP_USERNAME           ("gatein.email.smtp.username"),
-  SMTP_PASSWORD           ("gatein.email.smtp.password"),
-  SMTP_EMAIL              ("gatein.email.smtp.from"),
+  SMTP_HOST               ("smtp_host", "gatein.email.smtp.host"),
+  SMTP_PORT               ("smtp_port", "gatein.email.smtp.port"),
+  SMTP_SECURED_CONNECTION ("smtp_secured_connection", "gatein.email.smtp.auth"),
+  SMTP_USERNAME           ("smtp_username", "gatein.email.smtp.username"),
+  SMTP_PASSWORD           ("smtp_password", "gatein.email.smtp.password"),
+  SMTP_EMAIL              ("smtp_email", "gatein.email.smtp.from"),
   
-  CHAT_IP   ("exo.chat.server"),
-  CHAT_PORT ("exo.chat.port"),
-  
-  WS_BLANK   ("exo.website.blank"),
-  WS_SAMPLES ("exo.website.samples");
+  WS_BLANK   ("ws_blank", "exo.website.blank"),
+  WS_SAMPLES ("ws_samples", "exo.website.samples");
 
+  private String propertyIndex;
   private String propertyName;
   
-  private SetupWizardData(String propertyName) {
+  private SetupWizardData(String propertyIndex, String propertyName) {
     this.propertyName = propertyName;
+    this.propertyIndex = propertyIndex;
+  }
+  
+  public String getPropertyIndex() {
+    return this.propertyIndex;
   }
   
   public String getPropertyName() {
     return this.propertyName;
+  }
+  
+  /**
+   * This method returns the name corresponding to the index of data
+   * @param index
+   * @return property name
+   */
+  public static String getPropertyName(String index) {
+    String name = "";
+    if(index != null && index.length() > 0) {
+      for(SetupWizardData data : SetupWizardData.values()) {
+        if(index.equals(data.getPropertyIndex())) {
+          name = data.getPropertyName();
+          break;
+        }
+      }
+    }
+    return name;
   }
 }

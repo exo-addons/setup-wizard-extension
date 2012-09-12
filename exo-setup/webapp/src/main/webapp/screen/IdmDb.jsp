@@ -20,7 +20,7 @@
           <div class="span2">
             <div class="form-inline">
               <select id="selectIdmDs">
-                <option>Ds1</option>
+                <option>java:/comp/env/exo-id</option>
                 <option>Ds2</option>
               </select>
             </div>

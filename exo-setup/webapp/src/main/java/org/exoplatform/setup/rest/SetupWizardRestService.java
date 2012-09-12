@@ -142,10 +142,10 @@ public class SetupWizardRestService {
   
         // Fetch all properties stores by user
         for(Map.Entry<String, List<String>> entry : queryParams.entrySet()) {
-          String ppName = entry.getKey();
+          String ppName = SetupWizardData.getPropertyName(entry.getKey());
           String ppValue = entry.getValue().get(0);
           
-         if(ppName != null && ppValue != null) {
+         if(ppName != null && ppName.length() > 0 && ppValue != null && ppValue.length() > 0) {
             if(exoConf.containsKey(ppName)) {
               // If property exists we update it
               exoConf.setProperty(ppName, ppValue);
@@ -287,7 +287,7 @@ public class SetupWizardRestService {
           if(ppObj != null) {
             String pp = ppObj.toString();
             pp = WizardUtility.mergeProperty(pp);
-            propertiesValues.put(data.getPropertyName(), pp);
+            propertiesValues.put(data.getPropertyIndex(), pp);
           }
         }
       }
@@ -297,7 +297,7 @@ public class SetupWizardRestService {
       logger.error("Cannot get startup informations: " + e.getMessage(), e);
     }
     
-    return Response.ok().entity(dto).cacheControl(cacheControl).build();
+    return Response.ok(dto).cacheControl(cacheControl).build();
   }
   
   /**

@@ -50,7 +50,7 @@ public class WizardProperties {
    * @return
    */
   public static Integer getFirstScreenNumber() {
-    return getConf().getInteger("exo.setupwizard.first.screen", 0);
+    return getConf().getInteger("exo.setupwizard.first.screen", 1);
   }
   
   /**

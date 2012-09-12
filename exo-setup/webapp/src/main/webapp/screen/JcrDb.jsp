@@ -21,7 +21,7 @@
             <div class="form-inline">
               <select id="selectJcrDs">
                 <option>Ds1</option>
-                <option>Ds2</option>
+                <option>java:/comp/env/exo-jcr</option>
               </select>
             </div>
           </div>
