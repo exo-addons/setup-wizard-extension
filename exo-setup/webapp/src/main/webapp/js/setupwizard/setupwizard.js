@@ -11,6 +11,8 @@ SetupWizard.SETUP_DB_TYPE = "standard";
 SetupWizard.INPUT_MIN_SIZE = 3;
 SetupWizard.INPUT_MAX_SIZE = 40;
 SetupWizard.EMAIL_REGEXP = /^([a-zA-Z0-9_\.\-])+\@((([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+)$/;
+SetupWizard.INIT_NB_AJAX = 0;
+SetupWizard.INIT_TOTAL_AJAX = 3;
 
 /**
  * SERVER VARIABLES
@@ -89,48 +91,91 @@ SetupWizard.initSetupWizard = function() {
   SetupWizard.displayGlobalLoader();
   SetupWizard.initSystemProperties();
   SetupWizard.initDataSources();
+  SetupWizard.initStartupInformations();
+}
 
+SetupWizard.initSystemProperties = function() {
+  $.ajax({
+    url: "/setup/setuprest/service/pp",
+    success: function(data) {
+      var javaMap = data.systemPropertiesDto.data.entry;
+      $.each(javaMap, function(i, item){
+        var key = item.key.$;
+        var value = item.value.$;
+        SetupWizard.writeNewRow("SystemPropertiesTable", key, value);
+      });
+      
+      SetupWizard.INIT_NB_AJAX++;
+      console.log("initSystemProperties: " + SetupWizard.INIT_NB_AJAX);
+      SetupWizard.finalizeInitSetupWizard();
+    }
+  });
+}
+
+SetupWizard.initDataSources = function() {
+  $.ajax({
+    url: "/setup/setuprest/service/ds",
+    success: function(data) {
+      var javaList = data.datasourcesDto.data;
+      $.each(javaList, function(i, item){
+        var elemList = item.$;
+        $("#selectJcrDs").append("<option>"+elemList+"</option>");
+        $("#selectIdmDs").append("<option>"+elemList+"</option>");
+      });
+      
+      SetupWizard.INIT_NB_AJAX++;
+      console.log("initDataSources: " + SetupWizard.INIT_NB_AJAX);
+      SetupWizard.finalizeInitSetupWizard();
+    }
+  });
+}
+
+SetupWizard.initStartupInformations = function() {
   // Ajax request to get all startup informations
   $.ajax({
     url: "/setup/setuprest/service/si"
   })
   .always(function (data) {
-    SetupWizard.finalizeInitSetupWizard(data);
+    // Init 2 global variables FIRST_SCREEN & DEBUG_MODE
+    if(data != undefined && data.StartupInformationDto != undefined) {
+      if(SetupWizard.FIRST_SCREEN == undefined && data.StartupInformationDto.firstScreenNumber.$ != undefined) {
+        SetupWizard.FIRST_SCREEN = data.StartupInformationDto.firstScreenNumber.$;
+      }
+      if(SetupWizard.DEBUG_MODE == undefined && data.StartupInformationDto.isDebugActivated.$ != undefined) {
+        SetupWizard.DEBUG_MODE = data.StartupInformationDto.isDebugActivated.$;
+      }
+    
+      // Fetch all properties and fill a table
+      var propertiesValues = data.StartupInformationDto.propertiesValues.entry;
+      if(propertiesValues != undefined) {
+        for(var i=0; i<propertiesValues.length; i++) {
+          SetupWizard.DEFAULT_VALUES_PP[propertiesValues[i].key.$] = propertiesValues[i].value.$;
+        }
+      }
+    }
+    
+    // With pp recovered, pre fill all fields of setup wizard
+    SetupWizard.preFillFields();
+    
+    SetupWizard.INIT_NB_AJAX++;
+      console.log("initStartupInformations: " + SetupWizard.INIT_NB_AJAX);
+    SetupWizard.finalizeInitSetupWizard();
   });
 }
 
 /**
  * Callback method called at the return of ajax request from init method
  */
-SetupWizard.finalizeInitSetupWizard = function(data) {
+SetupWizard.finalizeInitSetupWizard = function() {
   
-  // Init 2 global variables FIRST_SCREEN & DEBUG_MODE
-  if(data != undefined && data.StartupInformationDto != undefined) {
-    if(SetupWizard.FIRST_SCREEN == undefined && data.StartupInformationDto.firstScreenNumber.$ != undefined) {
-      SetupWizard.FIRST_SCREEN = data.StartupInformationDto.firstScreenNumber.$;
+  if(SetupWizard.INIT_NB_AJAX >= SetupWizard.INIT_TOTAL_AJAX) {
+    // hide global loader
+    SetupWizard.hideGlobalLoader();
+    
+    // Display first screen
+    if(SetupWizard.FIRST_SCREEN != -1) {
+      SetupWizard.showStep(SetupWizard.FIRST_SCREEN);
     }
-    if(SetupWizard.DEBUG_MODE == undefined && data.StartupInformationDto.isDebugActivated.$ != undefined) {
-      SetupWizard.DEBUG_MODE = data.StartupInformationDto.isDebugActivated.$;
-    }
-  
-    // Fetch all properties and fill a table
-    var propertiesValues = data.StartupInformationDto.propertiesValues.entry;
-    if(propertiesValues != undefined) {
-      for(var i=0; i<propertiesValues.length; i++) {
-        SetupWizard.DEFAULT_VALUES_PP[propertiesValues[i].key.$] = propertiesValues[i].value.$;
-      }
-    }
-  }
-  
-  // With pp recovered, pre fill all fields of setup wizard
-  SetupWizard.preFillFields();
-  
-  // hide global loader
-  SetupWizard.hideGlobalLoader();
-  
-  // Display first screen
-  if(SetupWizard.FIRST_SCREEN != -1) {
-    SetupWizard.showStep(SetupWizard.FIRST_SCREEN);
   }
 }
 
@@ -279,34 +324,6 @@ SetupWizard.displayGlobalLoader = function(noScreen) {
 
 SetupWizard.hideGlobalLoader = function(noScreen) {
   $('#global_loader').hide();
-}
-
-SetupWizard.initSystemProperties = function() {
-  $.ajax({
-    url: "/setup/setuprest/service/pp",
-    success: function(data) {
-      var javaMap = data.systemPropertiesDto.data.entry;
-      $.each(javaMap, function(i, item){
-        var key = item.key.$;
-        var value = item.value.$;
-        SetupWizard.writeNewRow("SystemPropertiesTable", key, value);
-      });
-    }
-  });
-}
-
-SetupWizard.initDataSources = function() {
-  $.ajax({
-    url: "/setup/setuprest/service/ds",
-    success: function(data) {
-      var javaList = data.datasourcesDto.data;
-      $.each(javaList, function(i, item){
-        var elemList = item.$;
-        $("#selectJcrDs").append("<option>"+elemList+"</option>");
-        $("#selectIdmDs").append("<option>"+elemList+"</option>");
-      });
-    }
-  });
 }
 
 
