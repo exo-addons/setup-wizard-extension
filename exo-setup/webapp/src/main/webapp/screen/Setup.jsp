@@ -3,47 +3,7 @@
       <div class="Content">
         <p class="LabelCT">We have detected the following environment on your server</p>
         <div class="BlockTable">
-          <table class="table table-striped">
-            <thead>
-            </thead>
-            <tbody>
-              <tr>
-                <td>App Server</td>
-                <td>Apache tomcat/6.0.24</td>
-              </tr>
-              <tr>
-                <td>JVM</td>
-                <td>Sun 1.6.0_20</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-              <tr>
-                <td>OS</td>
-                <td>Mac OS X 10.5.8 (x86_64)</td>
-              </tr>
-            </tbody>
+          <table class="table table-striped" id ="SystemPropertiesTable">
           </table>
         </div>
         <div>

@@ -4,7 +4,7 @@
         <p class="LabelCT">The database will be used to host the JCR</p>
         
         <div class="alert alert-info">
-          <button class="close" data-dismiss="alert">×</button>
+          <button class="close" data-dismiss="alert">ï¿½</button>
           <strong>Warning!</strong> You need to install your database driver
         </div>
         
@@ -20,8 +20,6 @@
           <div class="span2">
             <div class="form-inline">
               <select id="selectJcrDs">
-                <option>Ds1</option>
-                <option>java:/comp/env/exo-jcr</option>
               </select>
             </div>
           </div>

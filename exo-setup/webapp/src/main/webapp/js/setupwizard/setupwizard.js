@@ -87,7 +87,9 @@ SetupWizard.initSetupWizard = function() {
   console.info = console.info || function(){};
   
   SetupWizard.displayGlobalLoader();
-  
+  SetupWizard.initSystemProperties();
+  SetupWizard.initDataSources();
+
   // Ajax request to get all startup informations
   $.ajax({
     url: "/setup/setuprest/service/si"
@@ -278,6 +280,35 @@ SetupWizard.displayGlobalLoader = function(noScreen) {
 SetupWizard.hideGlobalLoader = function(noScreen) {
   $('#global_loader').hide();
 }
+
+SetupWizard.initSystemProperties = function() {
+  $.ajax({
+    url: "/setup/setuprest/service/pp",
+    success: function(data) {
+      var javaMap = data.systemPropertiesDto.data.entry;
+      $.each(javaMap, function(i, item){
+        var key = item.key.$;
+        var value = item.value.$;
+        SetupWizard.writeNewRow("SystemPropertiesTable", key, value);
+      });
+    }
+  });
+}
+
+SetupWizard.initDataSources = function() {
+  $.ajax({
+    url: "/setup/setuprest/service/ds",
+    success: function(data) {
+      var javaList = data.datasourcesDto.data;
+      $.each(javaList, function(i, item){
+        var elemList = item.$;
+        $("#selectJcrDs").append("<option>"+elemList+"</option>");
+        $("#selectIdmDs").append("<option>"+elemList+"</option>");
+      });
+    }
+  });
+}
+
 
 
 /*===========================================================================================================*
