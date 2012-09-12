@@ -197,17 +197,23 @@ SetupWizard.preFillFields = function() {
   }
   
   // Step8: Website
+  $("#radioWebsiteInstall").attr("checked", true);
   if(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_BLANK] != undefined) {
-    $("#radioWebsiteBlank").attr("checked", SetupWizard.getBoolean(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_BLANK]));
+    var bbBlank = SetupWizard.getBoolean(SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_BLANK]);
+    if(bbBlank) {
+      $("#radioWebsiteBlank").attr("checked", true);
+    }
+    else {
+      $("#radioWebsiteInstall").attr("checked", true);
+    }
   }
-  else {
-    $("#radioWebsiteInstall").attr("checked", true);
-    var samples = SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_SAMPLES];
-    if(samples != undefined) {
-      var arrSamples = samples.split(',');
-      for(var i=0; i<arrSamples.length; i++) {
-        $("input[value=" + arrSamples[i] + "]").attr("checked", true);
-      }
+  var samples = SetupWizard.DEFAULT_VALUES_PP[SetupWizard.WS_SAMPLES];
+  if(samples != undefined) {
+    // HACK: we need to transform pp "[toto1, toto2]" to "toto1,toto2" to have a good array
+    // it's a problem from WS which returns this kind of string
+    var arrSamples = samples.replace(/\[|\s+|\]/g,"").split(",");
+    for(var i=0; i<arrSamples.length; i++) {
+      $("input[value=" + arrSamples[i] + "]").attr("checked", true);
     }
   }
 }
