@@ -4,7 +4,7 @@
         <p class="LabelCT">The database will be used to host the IDM</p>
         
         <div class="alert alert-info">
-          <button class="close" data-dismiss="alert">Ã—</button>
+          <button class="close" data-dismiss="alert">×</button>
           <strong>Warning!</strong> You need to install your database driver
         </div>
         
