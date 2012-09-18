@@ -6,19 +6,28 @@
           <div class="form-horizontal">
             <fieldset>
               <div class="control-group">
-                <label class="control-label" for="inputMailSmtpHost">SMTP Host</label>
+                <label class="control-label" for="inputMailSmtpHost">
+                  SMTP Host
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputMailSmtpHost">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputMailPort">Port</label>
+                <label class="control-label" for="inputMailPort">
+                  Port
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputMailPort">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="checkboxMailSecure">Secured connection</label>
+                <label class="control-label" for="checkboxMailSecure">
+                Secured connection
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <label class="checkbox">
                     <input type="checkbox" id="checkboxMailSecure" value="secured_connection">
@@ -26,19 +35,28 @@
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputMailUserName">Username</label>
+                <label class="control-label" for="inputMailUserName">
+                  Username
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputMailUserName">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputMailPassword">Password</label>
+                <label class="control-label" for="inputMailPassword">
+                  Password
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputMailPassword">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputMailEmail">Email</label>
+                <label class="control-label" for="inputMailEmail">
+                  Email
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputMailEmail">
                 </div>

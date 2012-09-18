@@ -6,25 +6,37 @@
           <div class="form-horizontal">
             <fieldset>
               <div class="control-group">
-                <label class="control-label" for="inputUsername">Username</label>
+                <label class="control-label" for="inputUsername">
+                  Username
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputUsername">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputPassword">Password</label>
+                <label class="control-label" for="inputPassword">
+                  Password
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputPassword">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputConfirmPassword">Confirm password</label>
+                <label class="control-label" for="inputConfirmPassword">
+                  Confirm password
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputConfirmPassword">
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputEmail">Email</label>
+                <label class="control-label" for="inputEmail">
+                  Email
+                  &nbsp;<span style="color:red; font-weight: bold;">*</span>
+                </label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="inputEmail">
                 </div>
