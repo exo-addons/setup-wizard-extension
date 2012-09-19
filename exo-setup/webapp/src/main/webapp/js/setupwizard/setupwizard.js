@@ -106,7 +106,6 @@ SetupWizard.initSystemProperties = function() {
       });
       
       SetupWizard.INIT_NB_AJAX++;
-      console.log("initSystemProperties: " + SetupWizard.INIT_NB_AJAX);
       SetupWizard.finalizeInitSetupWizard();
     }
   });
@@ -124,7 +123,6 @@ SetupWizard.initDataSources = function() {
       });
       
       SetupWizard.INIT_NB_AJAX++;
-      console.log("initDataSources: " + SetupWizard.INIT_NB_AJAX);
       SetupWizard.finalizeInitSetupWizard();
     }
   });
@@ -158,7 +156,6 @@ SetupWizard.initStartupInformations = function() {
     SetupWizard.preFillFields();
     
     SetupWizard.INIT_NB_AJAX++;
-      console.log("initStartupInformations: " + SetupWizard.INIT_NB_AJAX);
     SetupWizard.finalizeInitSetupWizard();
   });
 }
@@ -668,8 +665,9 @@ SetupWizard.writeNewRow = function(tableId, td1, td2) {
   var trs = $('#' + tableId + ' tr');
   var isExisting = false;
   for(var i=0; i<trs.length; i++) {
-    var lineTd1 = $(trs[i].children[0]).html();
-    var lineTd2 = $(trs[i].children[1]).html();
+    // HACK (IE7, IE8) dom element returned by these navigators are in LOWER case (need to get only text) PLF-3674
+    var lineTd1 = $(trs[i].children[0]).text();
+    var lineTd2 = $(trs[i].children[1]).text();
     if(td1 == lineTd1 && td2 == lineTd2) {
       isExisting = true;
       break;
