@@ -1,4 +1,4 @@
-package org.exoplatform.setup.rest;
+package org.exoplatform.setup.service;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.exoplatform.commons.utils.SecurityHelper;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.setup.data.*;
-import org.exoplatform.setup.service.WizardTailService;
 import org.exoplatform.setup.util.WizardProperties;
 import org.exoplatform.setup.util.WizardUtility;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
