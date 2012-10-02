@@ -100,11 +100,14 @@ SetupWizard.initSystemProperties = function() {
     success: function(data) {
       var javaMap = data.systemPropertiesDto.data.entry;
       $.each(javaMap, function(i, item){
-        var key = item.key.$;
-        var value = item.value.$;
-        SetupWizard.writeNewRow("SystemPropertiesTable", key, value);
+        vi =  item.value;
+        if (vi != undefined){
+          var key = item.key.$;
+          var value = vi.$;
+          SetupWizard.writeNewRow("SystemPropertiesTable", key, value);
+        }
       });
-      
+
       SetupWizard.INIT_NB_AJAX++;
       SetupWizard.finalizeInitSetupWizard();
     }
