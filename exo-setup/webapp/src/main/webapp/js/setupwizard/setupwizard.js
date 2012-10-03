@@ -675,6 +675,11 @@ SetupWizard.writeNewRow = function(tableId, td1, td2) {
       isExisting = true;
       break;
     }
+    if(td1 == lineTd1){
+      $(trs[i].children[1]).html(td2);
+      isExisting = true;
+      break;
+    }
   }
   
   // Add row
