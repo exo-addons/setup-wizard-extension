@@ -6,21 +6,6 @@
           <table class="table table-striped" id ="SystemPropertiesTable">
           </table>
         </div>
-        <div>
-          <div class="form-horizontal">
-            <fieldset>
-              <div class="control-group">
-                <label class="control-label languageLabel" for="select01">Choose Wizard Language:</label>
-                <div class="controls languageOptions">
-                  <select id="select01">
-                    <option>English</option>
-                    <option>French</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
       </div>
       
       <div class="ButtonContent">

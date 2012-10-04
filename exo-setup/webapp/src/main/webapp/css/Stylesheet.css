@@ -87,11 +87,6 @@ body {
   margin-left: 180px;
 }
 
-.Setup .BlockTable {
-  height: 210px;
-  overflow-y: scroll;
-  margin-bottom: 27px;
-}
 
 .SetupType .control-group {
   padding: 50px 0 0 50px;
@@ -117,7 +112,7 @@ body {
   padding: 25px 0 10px 0;
 }
 
-.Summary .BlockTable {
+.BlockTable {
   height: 250px;
   overflow-y: scroll;
   margin-bottom: 27px;
