@@ -6,7 +6,6 @@ var SetupWizard = {};
 
 /** GLOBAL VARIABLES **/
 SetupWizard.NB_SCREENS = 10;
-SetupWizard.SETUP_TYPE = "standard";
 SetupWizard.SETUP_DB_TYPE = "standard";
 SetupWizard.INPUT_MIN_SIZE = 3;
 SetupWizard.INPUT_MAX_SIZE = 40;
@@ -336,16 +335,6 @@ SetupWizard.hideGlobalLoader = function(noScreen) {
  * Setup
  */
 SetupWizard.validateStep1 = function(event) {
-  SetupWizard.showStep(2);
-}
-
-/**
- * SetupType
- */
-SetupWizard.validateStep2 = function() {
-  // store wizard type
-  SetupWizard.SETUP_TYPE = $('input[name=setupTypeOptions]:checked').val();
-  
   SetupWizard.showStep(3);
 }
 
@@ -430,9 +419,6 @@ SetupWizard.validateStep4 = function() {
  * IdmSetup
  */
 SetupWizard.validateStep5 = function() {
-
-  // store db type
-  SetupWizard.SETUP_TYPE = $('input[name=radioIdmSetup]:checked').val();
   
   SetupWizard.showStep(6);
 }

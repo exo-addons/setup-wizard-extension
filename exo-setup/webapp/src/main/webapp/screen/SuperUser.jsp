@@ -60,7 +60,7 @@
               </div>
             </td>
             <td width="30%">
-            <input class="btn" type="submit" value="Previous" onclick="SetupWizard.showStep(2);">
+            <input class="btn" type="submit" value="Previous" onclick="SetupWizard.showStep(1);">
             <input class="btn btn-primary" type="submit" value="Next" onclick="SetupWizard.validateStep3();">
             </td>
           </tr>

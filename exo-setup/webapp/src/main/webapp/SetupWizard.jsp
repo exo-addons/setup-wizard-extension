@@ -65,10 +65,6 @@
       <%@ include file="screen/Setup.jsp"%>
     </div>
 
-    <div id="setup2" class="SetupWizardPopup" style="display: none">
-      <%@ include file="screen/SetupType.jsp"%>
-    </div>
-
     <div id="setup3" class="SetupWizardPopup" style="display: none">
       <%@ include file="screen/SuperUser.jsp"%>
     </div>
