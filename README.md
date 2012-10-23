@@ -49,12 +49,11 @@ In the next step you will only need "setup.war". This web application already co
 After building Setup Wizard, copy "setup.war" that you find under "plf-setup-wizard/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
 
 You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/tomcat-bundle/webapps/starter/WEB-INF" and comment this part :
-_____________________________________________________________________________________________
 
 <listener>
     <listener-class>org.exoplatform.container.web.PortalContainerCreator</listener-class> 
 </listener>
-______________________________________________________________________________________________
+
 
 The portal container will be launched at the end of the Wizard process with the new properties entered by user.
 
@@ -64,12 +63,12 @@ The portal container will be launched at the end of the Wizard process with the 
 After building Setup Wizard, copy "setup.war" that you find under "plf-setup-wizard/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
 
 You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/starter-gatein-3.2.x-PLF.ear/starter.war/WEB-INF" and comment this part :
-_____________________________________________________________________________________________
+
 
 <listener>
     <listener-class>org.exoplatform.container.web.PortalContainerCreator</listener-class> 
 </listener>
-______________________________________________________________________________________________
+
 
 The portal container will be launched at the end of the Wizard process with the new properties entered by user.
 
