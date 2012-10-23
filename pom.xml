@@ -73,10 +73,11 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  
-  
-  <modules>
-    <module>exo-setup</module>
-  </modules>
+
+
+    <modules>
+        <module>component</module>
+        <module>webapp</module>
+    </modules>
   
 </project>
