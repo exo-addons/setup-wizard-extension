@@ -1,0 +1,126 @@
+body {
+  font-size: 15px;
+  line-height: 20px;
+  font-family: arial,tahoma,verdana,sans-serif;
+  color: #575757;
+  background: #ddd;
+  margin: 10px;
+}
+
+
+/**
+ * GENERIC CLASSES
+ */
+
+.SetupWizardPopup {
+  border-radius: 4px;
+  box-shadow: 1px 2px 6px #a3a6a7;
+  width: 590px;
+  background: white;
+  margin: 0 auto;
+}
+
+.SetupWizardPopup .Content .LabelCT{
+  font-size: 18px;
+  color: #51575b;
+  padding-bottom: 10px;
+} 
+
+.SetupWizardPopup .ButtonContent{
+  border-radius: 0 0 4px 4px;
+  background: url('../background/ButtonBGCT.png') #F2F2F2 repeat-x;
+  text-align: right;
+  padding: 26px 20px 26px 0px;
+}
+
+.SetupWizardPopup .TitleBar {
+  border-radius: 2px 2px 0 0;
+  background: url('../background/titlebar.png') repeat-x;
+  color: #dfdfdf;
+  font-size: 18px;
+  padding: 4px 0 14px 12px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+.SetupWizardPopup .Content {
+  padding: 8px 30px 8px 30px;
+  height: 321px;
+}
+
+
+.SetupWizardPopup .form-inline {
+  padding: 15px 0 15px 0;
+}
+
+
+.SetupWizardPopup .progress {
+  margin: 2px 0 0 8px;
+}
+
+.loader_ctr {
+  display: none;
+  margin: 2px 0 0 7px;
+}
+.loader {
+  background: url('../background/ajax-loader.gif');
+  width: 16px;
+  height: 16px;
+}
+
+
+/**
+ * Screens specificities
+ */
+
+.Setup .table {
+  font-size: 13px;
+}
+
+.Setup .languageLabel {
+  width: 170px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.Setup .languageOptions {
+  margin-left: 180px;
+}
+
+
+.SetupType .control-group {
+  padding: 50px 0 0 50px;
+}
+
+.SetupType form {
+  margin: 40px 0 0 40px;
+}
+
+.SetupType label {
+  padding: 20px 0 20px 0;
+}
+
+.IdmSetup .control-group {
+  padding: 0 0 0 50px;
+}
+
+.IdmSetup .radio {
+  margin: 20px 20px 20px 20px;
+}
+
+.Website .website {
+  padding: 25px 0 10px 0;
+}
+
+.BlockTable {
+  height: 250px;
+  overflow-y: scroll;
+  margin-bottom: 27px;
+  font-size: 13px;
+}
+
+.Finish .progress {
+  margin: 50px 0 50px 0;
+}
+ 
+ 
