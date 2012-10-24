@@ -64,7 +64,7 @@ Deploy with eXo Platform -3.5.4 JBoss EAP -5.1
 
 * After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/plf-setup-wizard/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
 
-* You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/starter-gatein-3.2.x-PLF.ear/starter.war/WEB-INF" and comment this part :
+* You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/server/default/deploy/starter-gatein-3.2.x-PLF.ear/starter.war/WEB-INF" and comment this part :
 
         <listener>
           <listener-class>org.exoplatform.container.web.PortalContainerCreator</listener-class> 
