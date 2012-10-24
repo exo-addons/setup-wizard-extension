@@ -21,11 +21,11 @@
       <artifactId>jsr311-api</artifactId>
       <scope>provided</scope>
     </dependency>
-		<dependency>
-			<groupId>org.exoplatform.ws</groupId>
-			<artifactId>exo.ws.rest.core</artifactId>
-			<scope>provided</scope>
-		</dependency>
+      <dependency>
+	<groupId>org.exoplatform.ws</groupId>
+	<artifactId>exo.ws.rest.core</artifactId>
+	<scope>provided</scope>
+      </dependency>
     <dependency>
       <groupId>commons-configuration</groupId>
       <artifactId>commons-configuration</artifactId>
@@ -36,7 +36,7 @@
        <scope>provided</scope>
     </dependency>
 
-      <dependency>
+    <dependency>
           <groupId>org.jboss.resteasy</groupId>
           <artifactId>resteasy-jaxrs</artifactId>
           <version>${org.jboss.resteasy.version}</version>
