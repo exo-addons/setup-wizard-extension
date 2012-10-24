@@ -20,8 +20,8 @@
     <org.exoplatform.kernel.version>2.3.8-GA</org.exoplatform.kernel.version>
     <commons-configuration.version>1.7</commons-configuration.version>
     <javax.ws.rs.version>1.1</javax.ws.rs.version>
-		<org.exoplatform.ws.version>2.2.8-GA</org.exoplatform.ws.version>
-		<log4j.version>1.2.14</log4j.version>
+    <org.exoplatform.ws.version>2.2.8-GA</org.exoplatform.ws.version>
+    <log4j.version>1.2.14</log4j.version>
     <servlet.api.version>2.5</servlet.api.version>
   </properties>
   
