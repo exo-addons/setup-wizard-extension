@@ -34,19 +34,19 @@ Build and Deploy instructions
 
 You can build Setup Wizard using the following command :
 
->mvn clean install
+mvn clean install
 
 After a build success of the project you will have:
 
-* "setup-wizard-component-0.9-SNAPSHOT.jar" under "PROJECT_HOME/plf-setup-wizard/component/target" -> Contains services, resources and accessories files. 
-* "setup.war" under "PROJECT_HOME/plf-setup-wizard/webapp/target" -> Contains the JavaScrpt, JSP, CSS code and the necessary libraries.
+* "PROJECT_HOME/plf-setup-wizard/component/target/setup-wizard-component-0.9-SNAPSHOT.jar" -> Contains services, resources and accessories files. 
+* "PROJECT_HOME/plf-setup-wizard/webapp/target/setup.war" -> Contains the JavaScrpt, JSP, CSS code and the necessary libraries.
 
 In the next step you will only need "setup.war". This web application already contains "setup-wizard-component-0.9-SNAPSHOT.jar". You find it under "setup.war/WEB-INF/lib" 
 
 3) Deploy Setup Wizard 
 -----------------------
 
-Deploy with eXo Platform -3.5.4 Tomcat Bundle
+3.1) Deploy with eXo Platform -3.5.4 Tomcat Bundle
 ---------------------------------------------
 
 * After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/plf-setup-wizard/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
@@ -59,7 +59,7 @@ Deploy with eXo Platform -3.5.4 Tomcat Bundle
 
 The portal container will be launched at the end of the Wizard process with the new properties entered by user.
 
-Deploy with eXo Platform -3.5.4 JBoss EAP -5.1
+3.2) Deploy with eXo Platform -3.5.4 JBoss EAP -5.1
 ----------------------------------------------
 
 * After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/plf-setup-wizard/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
