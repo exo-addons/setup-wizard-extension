@@ -76,7 +76,7 @@ The portal container will be launched at the end of the Wizard process with the 
 4) Start Setup Wizard 
 -----------------------
 
-Start eXo Platform -3.5.x 
+Start eXo Platform -3.5.4 
 
 Access Setup Wizard at: http://localhost:8080/setup
 
@@ -135,7 +135,6 @@ Maven dependencies issues
         </profiles>
 
         <activeProfiles>
-          <activeProfile>jboss-public-repository</activeProfile>
           <activeProfile>exo-public-repository</activeProfile>
         </activeProfiles>
       </settings>
