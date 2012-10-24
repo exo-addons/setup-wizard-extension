@@ -4,9 +4,8 @@ Introduction
 This application is created to allow user to setup some properties for eXo Platform Server.
 We are going to explain the steps to build and deploy Setup Wizard with eXo Platform -3.5.4
 
--------------------
 System requirements
--------------------
+===================
    
 * Java Development Kit 1.6
 * Recent Git client
