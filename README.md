@@ -34,7 +34,7 @@ Build and Deploy instructions
 
 You can build Setup Wizard using the following command :
 
-mvn clean install
+>mvn clean install
 
 After a build success of the project you will have:
 
