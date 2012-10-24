@@ -26,7 +26,7 @@ Build and Deploy instructions
 
 * {PROJECT_HOME}: refers to the directory where you cloned the project.
 
-* cd PROJECT_HOME
+* cd PROJECT_HOME/plf-setup-wizard
 
 
 2) Build Setup Wizard
@@ -38,8 +38,8 @@ mvn clean install
 
 After a build success of the project you will have:
 
-* "setup-wizard-component-0.9-SNAPSHOT.jar" under "PROJECT_HOME/component/target" -> Contains services, resources and accessories files. 
-* "setup.war" under "PROJECT_HOME/webapp/target" -> Contains the JavaScrpt, JSP, CSS code and the necessary libraries.
+* "setup-wizard-component-0.9-SNAPSHOT.jar" under "PROJECT_HOME/plf-setup-wizard/component/target" -> Contains services, resources and accessories files. 
+* "setup.war" under "PROJECT_HOME/plf-setup-wizard/webapp/target" -> Contains the JavaScrpt, JSP, CSS code and the necessary libraries.
 
 In the next step you will only need "setup.war". This web application already contains "setup-wizard-component-0.9-SNAPSHOT.jar". You find it under "setup.war/WEB-INF/lib" 
 
@@ -49,7 +49,7 @@ In the next step you will only need "setup.war". This web application already co
 Deploy with eXo Platform -3.5.4 Tomcat Bundle
 ---------------------------------------------
 
-* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
+* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/plf-setup-wizard/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
 
 * You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/tomcat-bundle/webapps/starter/WEB-INF" and comment this part :
 
@@ -62,7 +62,7 @@ The portal container will be launched at the end of the Wizard process with the 
 Deploy with eXo Platform -3.5.4 JBoss EAP -5.1
 ----------------------------------------------
 
-* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
+* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/plf-setup-wizard/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
 
 * You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/starter-gatein-3.2.x-PLF.ear/starter.war/WEB-INF" and comment this part :
 
