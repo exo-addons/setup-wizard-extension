@@ -1,8 +1,8 @@
-Setup Wizard for eXo Platform :
+Introduction
+============
 
-Setup Wizard is a web application that allows user to setup some properties for eXo Platform Server.
-
-This document explains how to build and deploy Setup Wizard with eXo Platform -3.5.x
+This application is created to allow user to setup some properties for eXo Platform Server.
+We are going to explain the steps to build and deploy Setup Wizard with eXo Platform -3.5.4
 
 -------------------
 System requirements
@@ -11,9 +11,9 @@ System requirements
 * Java Development Kit 1.6
 * Recent Git client
 * Recent Maven 3
-* eXo-Platform-tomcat-3.5.x Tomcat Bundle
-* eXo-Platform-tomcat-3.5.x JBoss Bundle
-* PLF_HOME is the location of the unzipped eXo server
+* eXo-Platform-tomcat-3.5.4 Tomcat Bundle
+* eXo-Platform-tomcat-3.5.4 JBoss EAP -5.1
+* {PLF_HOME}: The location of the unzipped eXo server.
 * The eXo server will run on port 8080, make sure this port is not currently in use
 
 
@@ -25,7 +25,7 @@ Build and Deploy instructions
 
 * git clone git@github.com:exoplatform/plf-setup-wizard.git
 
-PROJECT_HOME: refers to plf-setup-wizard, the directory where you cloned the project.
+* {PROJECT_HOME}: refers to the directory where you cloned the project.
 
 * cd PROJECT_HOME
 
@@ -39,18 +39,18 @@ mvn clean install
 
 After a build success of the project you will have:
 
-* "setup-wizard-component-0.9-SNAPSHOT.jar" under "PROJECT_HOME/component/target"
-* "setup.war" under "PROJECT_HOME/webapp/target" 
+* "setup-wizard-component-0.9-SNAPSHOT.jar" under "PROJECT_HOME/component/target" -> Contains services, resources and accessories files. 
+* "setup.war" under "PROJECT_HOME/webapp/target" -> Contains the JavaScrpt, JSP, CSS code and the necessary libraries.
 
 In the next step you will only need "setup.war". This web application already contains "setup-wizard-component-0.9-SNAPSHOT.jar". You find it under "setup.war/WEB-INF/lib" 
 
 3) Deploy Setup Wizard 
 -----------------------
 
-Deploy with eXo Platform -3.5.x Tomcat Bundle
+Deploy with eXo Platform -3.5.4 Tomcat Bundle
 ---------------------------------------------
 
-* After building Setup Wizard, copy "setup.war" that you find under "plf-setup-wizard/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
+* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/webapp/target" to "PLF_HOME/tomcat-bundle/webapps" directory.
 
 * You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/tomcat-bundle/webapps/starter/WEB-INF" and comment this part :
 
@@ -60,10 +60,10 @@ Deploy with eXo Platform -3.5.x Tomcat Bundle
 
 The portal container will be launched at the end of the Wizard process with the new properties entered by user.
 
-Deploy with eXo Platform -3.5.x JBoss Bundle
---------------------------------------------
+Deploy with eXo Platform -3.5.4 JBoss EAP -5.1
+----------------------------------------------
 
-* After building Setup Wizard, copy "setup.war" that you find under "plf-setup-wizard/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
+* After building Setup Wizard, copy "setup.war" that you find under "PROJECT_HOME/webapp/target" to "PLF_HOME/server/default/deploy" directory. 
 
 * You need to disable the Portal Container. Go to "web.xml" under "PLF_HOME/starter-gatein-3.2.x-PLF.ear/starter.war/WEB-INF" and comment this part :
 
