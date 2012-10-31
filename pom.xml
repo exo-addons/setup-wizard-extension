@@ -8,6 +8,12 @@
   <packaging>pom</packaging>
   <name>eXo Platform Setup Wizard</name>
   
+  <scm>
+    <connection>scm:git:git://github.com/exo-addons/blog-extension.git</connection>
+    <developerConnection>scm:git:git@github.com:exo-addons/blog-extension.git</developerConnection>
+    <url>https://github.com/exo-addons/blog-extension</url>
+  </scm>
+
   <properties>
     <!-- Defaut compiler settings -->
     <project.version>0.9-SNAPSHOT</project.version>
