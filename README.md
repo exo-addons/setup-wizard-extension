@@ -22,7 +22,7 @@ Build and Deploy instructions
 1) Clone Setup Wizard
 -----------------------
 
-* git clone git@github.com:exoplatform/plf-setup-wizard.git
+* git clone git@github.com:exo-addons/setup-wizard-extension.git
 
 * {PROJECT_HOME}: refers to the directory where you cloned the project.
 
